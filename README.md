@@ -116,6 +116,30 @@ If you're fond of Guard you might like [guard-rubycritic][4]. It automatically a
 
 For continuous integration, you can give [Jenkins CI][5] a spin. With it, you can [easily build your own (poor-man's) Code Climate][6]!
 
+Rake Task
+---------
+
+You can use RubyCritic as rake command like this:
+
+```ruby
+require "rubycritic/rake_task"
+
+Rubycritic::RakeTask.new do |task|
+  task.name = "your name"
+end
+```
+
+An more sophisticated rake task that would make use of all available configuration options could look like this:
+
+```Ruby
+RubyCritic::RakeTask.new do |task|
+  task.name    = 'custom_rake' # Whatever name you want. Defaults to "reek".
+  task.paths   = 'vendor/**/*.rb' # Glob pattern to match source files. Defaults to lib/**/*.rb
+  task.options = '--mode-ci'  # Defaults to ''. You can pass all the options here in that are shown by "rubycritic -h"
+  task.verbose = true  # Defaults to false
+end
+```
+
 Compatibility
 ---------------
 
